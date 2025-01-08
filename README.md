@@ -1,1 +1,2 @@
 # rock-paper-scissors
+This is console-based project of paper-scissors-rock game, a part of the Odin Foundations curriculum. It helps practice writing functions. It was especially useful for understanding scope and declaration. Later on the project will have user interface.
