@@ -11,6 +11,121 @@
        function getComputerChoice () {
             return actions.at(Math.floor(Math.random() * 3));
     };
+
+
+    function testInputValidity (ask) {
+    if (ask === '' || ask === null || typeof(ask) !== "string") {
+        console.log("Input should be non-empty text");
+        return false;
+    }
+    else if (ask !== actions[0] && ask !== actions[1] && ask !== actions[2]) {
+        console.log("Input should contain only one of three moves: rock, paper, or scissors");
+        return false;
+    }
+    else {
+        return true;
+    }
+};
+
+let humanChoice;
+function ask (){
+    humanChoice = window.prompt("Make your move: choose rock, paper, or scissors");
+    if (humanChoice !== null) {
+    return humanChoice.toLowerCase(); 
+    }
+};
+    
+function getHumanChoice () {
+    humanChoice = ask();
+    while (testInputValidity(humanChoice) !== true) {
+        ask();
+    }
+    if (humanChoice === actions[0] || humanChoice === actions[1] || humanChoice === actions[2]) {
+        return humanChoice;
+    }
+    };
+
+    let humanScore = 0;
+    let computerScore = 0;
+    let winner;
+    let winMove;
+    let loseMove;
+function playRound (humanChoice, computerChoice) {
+    if (humanChoice !== computerChoice) {
+        if (humanChoice === actions[1] && computerChoice === actions[0]) {
+        winner = "You";
+        winMove = actions[1];
+        loseMove = actions[0]; 
+        humanScore += 1;
+        }
+        else if (humanChoice === actions[0] && computerChoice === actions[1]) {
+        winner = "Computer";
+        winMove = actions[1];
+        loseMove = actions[0]; 
+        computerScore +=1;
+        }
+        else if (humanChoice === actions[0] && computerChoice === actions[2]) {
+        winner = "You";
+        winMove = actions[0];
+        loseMove = actions[2]; 
+        humanScore += 1;
+        }
+        else if (humanChoice === actions[2] && computerChoice === actions[0]) {
+        winner = "Computer";
+        winMove = actions[0];
+        loseMove = actions[2]; 
+        computerScore +=1;
+        }
+        else if (humanChoice === actions[1] && computerChoice === actions[2]) {
+        winner = "Computer";
+        winMove = actions[2];
+        loseMove = actions[1]; 
+        computerScore +=1;
+        }
+        else if (humanChoice === actions[2] && computerChoice === actions[1]) {
+        winner = "You";
+        winMove = actions[2];
+        loseMove = actions[1]; 
+        humanScore += 1;
+        }
+    console.log(winner + " won this time: " + winMove +" beat " + loseMove)
+    }
+else {
+        console.log("Even")
+    }
+}
+
+let roundNumber = 1;
+function playGame () {
+    while (roundNumber<=5) {
+        console.log(`Round ${roundNumber}`)
+        humanChoice = getHumanChoice();
+        computerChoice = getComputerChoice();
+        playRound(humanChoice, computerChoice);
+        console.log(`You: ${humanScore}\nComputer: ${computerScore}`)
+        roundNumber+=1;
+    }
+    if(computerScore > humanScore){
+     console.log("Computer won((")
+    }
+    else{
+     console.log("Congratulations! You won")
+    }
+}
+let agree;
+function getAgreeForPlay () {
+agree = window.prompt("Do you wanna play 5 rounds of paper-scissors-rock? (Type 'yes' or 'no')");
+agree.toLowerCase();
+ if (agree === "yes") {
+    playGame();
+ } 
+ else {
+    console.log("Come back when you wanna play");
+ } 
+} 
+
+getAgreeForPlay();
+
     </script>
 </body>
 </html>
